@@ -1,10 +1,12 @@
-[{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "com.apnamart.apnaconsumer",
-    "sha256_cert_fingerprints": [
-      "83:2C:49:47:30:3F:3C:FB:DB:F7:39:80:69:3E:8E:83:68:1D:91:09:7C:7C:A3:97:9F:33:05:89:3C:AB:13:BD",
-    ]
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.apnamart.apnaconsumer",
+      "sha256_cert_fingerprints": [
+        "83:2C:49:47:30:3F:3C:FB:DB:F7:39:80:69:3E:8E:83:68:1D:91:09:7C:7C:A3:97:9F:33:05:89:3C:AB:13:BD"
+      ]
+    }
   }
-}]
+]
