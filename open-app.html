@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Open App</title>
+  <meta charset="utf-8" />
+  <script type="text/javascript">
+    function openApp() {
+      const androidScheme = "apnaconsumer://shop/";
+      const androidFallback = "https://play.google.com/store/apps/details?id=com.apnamart.apnaconsumer";
+
+      const userAgent = window.navigator.userAgent.toLowerCase();
+      const isAndroid = userAgent.indexOf("android") > -1;
+
+      if (isAndroid) {
+        // Try to open app
+        window.location = androidScheme;
+
+        // Fallback after 1 second if app doesn't open
+        setTimeout(() => {
+          window.location = androidFallback;
+        }, 1500);
+      } else {
+        // iOS handling
+        const iosScheme = "apnaconsumer://shop/123";
+        const iosFallback = "https://apps.apple.com/app/id1234567890"; // your App Store link
+        window.location = iosScheme;
+
+        setTimeout(() => {
+          window.location = iosFallback;
+        }, 1500);
+      }
+    }
+  </script>
+</head>
+<body onload="openApp()">
+  <p>Redirecting...</p>
+</body>
+</html>
 
