@@ -1,35 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Redirecting...</title>
-  <script type="text/javascript">
-    function openApp() {
+  <script>
+    function redirectToAppOrStore() {
       const androidScheme = "apnaconsumer://shop/";
+      const playStoreURL = "https://play.google.com/store/apps/details?id=com.apnamart.apnaconsumer";
       const iosScheme = "apnaconsumer://shop/";
+      const iosStoreURL = "https://apps.apple.com/app/id1234567890"; // Replace with actual iOS app URL
 
-      const androidFallback = "https://play.google.com/store/apps/details?id=com.apnamart.apnaconsumer";
-      const iosFallback = "https://apps.apple.com/app/id1234567890"; // <-- Replace with real App Store link
+      const userAgent = navigator.userAgent.toLowerCase();
 
-      const userAgent = window.navigator.userAgent.toLowerCase();
-      const isAndroid = userAgent.includes("android");
-      const isIOS = /iphone|ipad|ipod/.test(userAgent);
-      const isMobile = isAndroid || isIOS;
-
-      if (isAndroid) {
-        window.location = androidScheme;
-        setTimeout(() => window.location = androidFallback, 1500);
-      } else if (isIOS) {
-        window.location = iosScheme;
-        setTimeout(() => window.location = iosFallback, 1500);
+      if (/android/.test(userAgent)) {
+        window.location.href = androidScheme;
+        setTimeout(() => {
+          window.location.href = playStoreURL;
+        }, 1500);
+      } else if (/iphone|ipad|ipod/.test(userAgent)) {
+        window.location.href = iosScheme;
+        setTimeout(() => {
+          window.location.href = iosStoreURL;
+        }, 1500);
       } else {
-        // Fallback for desktop
-        window.location = androidFallback;
+        // Desktop fallback
+        window.location.href = playStoreURL;
       }
     }
   </script>
 </head>
-<body onload="openApp()">
-  <p>Redirecting to app...</p>
+<body onload="redirectToAppOrStore()">
+  <p>Redirecting...</p>
 </body>
 </html>
