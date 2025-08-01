@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    const androidAppPackage = "com.apnamart.apnaconsumer"; // Replace with your actual package
+    const playStoreUrl = `https://play.google.com/store/apps/details?id=${androidAppPackage}`;
+
+    const iosAppLink = "https://apps.apple.com/app/idYOUR_APP_ID"; // Replace with your app ID
+
+    function isAndroid() {
+      return /android/i.test(navigator.userAgent);
+    }
+
+    function isIOS() {
+      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    }
+
+    function redirectToApp() {
+      const fullUrl = window.location.href;
+      const deepLink = `apnamart://shop${window.location.pathname.replace('/shop', '')}${window.location.search}`;
+
+      if (isAndroid()) {
+        // Try to open the app
+        window.location = deepLink;
+
+        // If app is not installed, redirect to Play Store
+        setTimeout(() => {
+          window.location = playStoreUrl;
+        }, 1500);
+      } else if (isIOS()) {
+        // iOS universal link (only works if properly configured in AASA)
+        window.location = deepLink;
+
+        // Fallback to App Store
+        setTimeout(() => {
+          window.location = iosAppLink;
+        }, 1500);
+      } else {
+        // Desktop fallback to Play Store
+        window.location = playStoreUrl;
+      }
+    }
+
+    window.onload = redirectToApp;
+  </script>
+</head>
+<body>
+  <p>Redirecting to app...</p>
+</body>
+</html>
