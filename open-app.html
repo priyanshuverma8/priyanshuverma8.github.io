@@ -1,39 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Open App</title>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
   <script type="text/javascript">
     function openApp() {
-      const androidScheme = "apnaconsumer://shop/";
+      const androidScheme = "apnaconsumer://shop/123";
+      const iosScheme = "apnaconsumer://shop/123";
+
       const androidFallback = "https://play.google.com/store/apps/details?id=com.apnamart.apnaconsumer";
+      const iosFallback = "https://apps.apple.com/app/id1234567890"; // <-- Replace with real App Store link
 
       const userAgent = window.navigator.userAgent.toLowerCase();
-      const isAndroid = userAgent.indexOf("android") > -1;
+      const isAndroid = userAgent.includes("android");
+      const isIOS = /iphone|ipad|ipod/.test(userAgent);
+      const isMobile = isAndroid || isIOS;
 
       if (isAndroid) {
-        // Try to open app
         window.location = androidScheme;
-
-        // Fallback after 1 second if app doesn't open
-        setTimeout(() => {
-          window.location = androidFallback;
-        }, 1500);
-      } else {
-        // iOS handling
-        const iosScheme = "apnaconsumer://shop/123";
-        const iosFallback = "https://apps.apple.com/app/id1234567890"; // your App Store link
+        setTimeout(() => window.location = androidFallback, 1500);
+      } else if (isIOS) {
         window.location = iosScheme;
-
-        setTimeout(() => {
-          window.location = iosFallback;
-        }, 1500);
+        setTimeout(() => window.location = iosFallback, 1500);
+      } else {
+        // Fallback for desktop
+        window.location = androidFallback;
       }
     }
   </script>
 </head>
 <body onload="openApp()">
-  <p>Redirecting...</p>
+  <p>Redirecting to app...</p>
 </body>
 </html>
-
